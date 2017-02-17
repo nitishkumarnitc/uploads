@@ -11,10 +11,14 @@ import {User} from "./user.class";
 @Injectable()
 export class LoginService {
 
-  public user:User;
-  public response:any;
+
+  private response:any;
   private loginUrl="http://www.mistu.org/etutor/login.php/";
-  private static userLoggedIn:boolean=true;
+
+  public static isUserLoggedIn:boolean=false;
+  public static welcomeMessage="eTutor Admin Panel";
+  public static user:User;
+
 
   constructor(private _http:Http) { }
   attemptLogin(loginInfo:any):Observable<User>{
@@ -27,32 +31,7 @@ export class LoginService {
       .map((response:Response)=><User> response.json())
       .do(data=>console.log("Login Response"+JSON.stringify(data)));
 
-
-    // console.log("Inside login service "+ JSON.stringify(this.response))
-    // if(this.response['isVerified']==1) {
-    //   this.userLoggedIn = true;
-    // }
-    // return this.response;
-
   }
 
-  public static resetIsUserLoggedIn(){
-    this.userLoggedIn=false;
-  }
 
-  getUserCredentails():User{
-    return this.user;
-  }
-
-  setUserCredentails(user:User){
-    this.user=user;
-  }
-
-  public static getIsUserLoggedIn(){
-    return this.userLoggedIn;
-  }
-
-  public static setIsUserLoggedIn(){
-    this.userLoggedIn=true;
-  }
 }

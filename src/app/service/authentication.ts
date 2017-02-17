@@ -14,10 +14,8 @@ export class Authentication implements CanActivate{
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
-
     console.log("Route value is "+route);
-    console.log("Value of user logged in is "+LoginService.getIsUserLoggedIn());
-    if(LoginService.getIsUserLoggedIn()){
+    if(LoginService.isUserLoggedIn){
       return true;
     }
     else{

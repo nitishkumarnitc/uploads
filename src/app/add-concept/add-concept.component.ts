@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {UploadsService} from "../service/uploads.service";
-import {Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {FormHelperService} from "../service/form-helper.service";
 
 @Component({
@@ -15,11 +15,14 @@ export class AddConceptComponent implements OnInit {
   response:string;
   errorMessge:any;
   GreetingMessage:string;
+  private  baseImageUrl:string;
   constructor(private _fb: FormBuilder,private uploadService:UploadsService,private router:Router) {
 
   }
 
   ngOnInit() {
+
+    this.baseImageUrl=FormHelperService.baseImageUrl;
 
     this.myForm = this._fb.group({
       Name: ['', [Validators.required, Validators.minLength(5)]],
@@ -27,7 +30,7 @@ export class AddConceptComponent implements OnInit {
       Order:['',Validators.required],
       Description:[''],
       QuestionTag:[''],
-      BaseImageUrl:[FormHelperService.baseImageUrl,Validators.required],
+      BaseImageUrl:[this.baseImageUrl,Validators.required],
       ConceptJson: this._fb.array([])
     });
 
@@ -71,7 +74,8 @@ export class AddConceptComponent implements OnInit {
     console.log("Save new Form API Called");
     this.uploadService.addConcept(model)
       .subscribe(response=>{this.response=response;
-      this.dataGoingToServer=false;this.setGreetingMessage()}, error=>this.errorMessge=<any>error);
+      this.dataGoingToServer=false;this.setGreetingMessage();
+      this.router.navigate(['/home'])}, error=>this.errorMessge=<any>error);
     console.log(JSON.stringify(this.response));
 
 
@@ -79,7 +83,7 @@ export class AddConceptComponent implements OnInit {
 
   setGreetingMessage(){
     if(this.response["Success"]=="OK"){
-      this.GreetingMessage="Cool!!   Concept Has been SuccessFully added, Go Back and Again Select a new Topic To add new Concept"
+      this.GreetingMessage="Success !!Go Back and Again Select a new Topic";
       this.myForm.reset();
     }else {
       this.GreetingMessage="OOOps, Some error occured, try again!!"
@@ -89,7 +93,7 @@ export class AddConceptComponent implements OnInit {
 
   cancelClicked(){
     this.myForm.reset();
-    this.router.navigate(['/home']);
+     this.router.navigate(['/home']);
   }
 
   getTopicName(){

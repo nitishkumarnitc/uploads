@@ -16,6 +16,7 @@ export class AddProblemComponent implements OnInit {
   response:string;
   errorMessge:any;
   GreetingMessage:string;
+  private baseImageUrl:string;
 
   TypeSelected:string;
 
@@ -28,6 +29,10 @@ export class AddProblemComponent implements OnInit {
 
   constructor(private _fb:FormBuilder,private uploadService:UploadsService,private router:Router) { }
 
+  getTopic(){
+    return FormHelperService.topicName;
+  }
+
   ngDoCheck(){
     console.log("value changed"+this.TypeSelected);
     if(this.TypeSelected==this.types[0]){
@@ -38,6 +43,8 @@ export class AddProblemComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.baseImageUrl=FormHelperService.baseImageUrl;
     this.addProblemForm=this._fb.group({
       Name:['',[Validators.required,Validators.minLength(5)]],
       TopicId:[FormHelperService.topicId,[Validators.required]],
@@ -46,7 +53,7 @@ export class AddProblemComponent implements OnInit {
       QuestionTag:[''],
       Level:['',Validators.required],
       TypeOfQuestion:['',Validators.required],
-      BaseImageUrl:[FormHelperService.baseImageUrl,Validators.required],
+      BaseImageUrl:[this.baseImageUrl,Validators.required],
       ProblemJson: this._fb.group({
         QuestionText:this._fb.array([]),
         Option1Text:this._fb.array([]),
@@ -160,6 +167,7 @@ export class AddProblemComponent implements OnInit {
     this.uploadService.addProblem(model)
       .subscribe(response=>{this.response=response;
         this.dataGoingToServer=false;this.setGreetingMessage();
+        this.router.navigate(['/home']);
       }, error=>this.errorMessge=<any>error);
     console.log(JSON.stringify(this.response));
 
@@ -168,7 +176,7 @@ export class AddProblemComponent implements OnInit {
 
   setGreetingMessage(){
     if(this.response["Success"]=="OK"){
-      this.GreetingMessage="Success, Go Back and select a Topic To add new Concept"
+      this.GreetingMessage="Success, Now Go Back and Select the topic again";
       this.addProblemForm.reset();
     }else {
       this.GreetingMessage="OOOps, Some error occured, try again!!";

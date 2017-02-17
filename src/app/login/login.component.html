@@ -1,15 +1,35 @@
-<div class="container-fluid">
+<div *ngIf="dataGoingToServer" class="loader" style="position: absolute;top: 0px; left: 0px;margin-left: 50%;margin-top: 50%;width:40px;height:40px">
+  <img src="../../assets/loader.gif" style="width: 100%;height: 100%;">
+
+</div>
+
+
+<div class="container-fluid" style="height: 100%;width: 100%">
 <div class="row" style="display:flex; margin-top: 10%;alignment: center;justify-content: center">
 <md-card class="col-md-4" style="height: 100%">
 
-      <div class="login-block">
-        <h1>Login</h1>
-        <input type="text" value="" placeholder="Username" id="username" />
-        <input type="password" value="" placeholder="Password" id="password" />
-        <button>Submit</button>
-      </div>
+  <div class="wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" novalidate>
+      <p class="title">Log in</p>
+      <input type="text" placeholder="email" autofocus formControlName="email"/>
+      <i class="fa fa-user"></i>
+      <input type="password" placeholder="password" formControlName="password" />
+      <button type="submit" [disabled]="loginForm.invalid">
+        <i class="spinner"></i>
+        <span class="state">Log in</span>
+      </button>
+    </form>
 
+  </div>
 
 </md-card>
+
+
+  <!--<div>addProblemForm details:-</div>-->
+  <!--<pre>Is addTopicForm valid?: <br>{{loginForm.valid | json}}</pre>-->
+  <!--<pre>form value: <br>{{loginForm.value | json}}</pre>-->
+
 </div>
 </div>
+
+

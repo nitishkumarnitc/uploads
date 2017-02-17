@@ -2,18 +2,16 @@
 <div *ngIf="data.length==0" class="loader" style="position: absolute;top: 0px; left: 0px;margin-left: 50%;margin-top: 50%;width:40px;height:40px">
   <img src="../../assets/loader.gif" style="width: 100%;height: 100%;">
 
-  <!--<div class="custom-modal" *ngIf="showPopUp" (click)="isShowPopUp($event)">-->
-    <!--<div class="custom-modal-continer">-->
-      <!--<div class="box text-center" id="custom-modal-id">-->
-        <!--<span class = "glyphicon glyphicon-remove pull-right" style="cursor:pointer" (click)="showPopUp=false;"></span>-->
-        <!--<p>What would you like to do?</p>-->
-        <!--<button class = "btn pull-left" (click)="showPopUp=false;openAddNewConceptForm()" > Add Concept</button>-->
-        <!--<button class="btn pull-right" (click) = "showPopUp=false;openAddNewProblemForm()"> Add Problem</button>-->
-      <!--</div>-->
-    <!--</div>-->
-
-  <!--</div>-->
-
+</div>
+<div class="custom-modal" *ngIf="showPopUp" (click)="isShowPopUp($event)">
+  <div class="custom-modal-continer">
+    <div class="box text-center" id="custom-modal-id">
+      <span class = "glyphicon glyphicon-remove pull-right" style="cursor:pointer" (click)="showPopUp=false;"></span>
+      <p>What would you like to do?</p>
+      <button class = "btn pull-left" (click)="showPopUp=false;openAddNewConceptForm()" > Add Concept</button>
+      <button class="btn pull-right" (click) = "showPopUp=false;openAddNewProblemForm()"> Add Problem</button>
+    </div>
+  </div>
 
 </div>
 <div class="row">
@@ -50,7 +48,7 @@
 </pagination>
 <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
 
-<div *ngIf="showPopUp">
-  <button md-raised-button color="primary" (click)="showPopUp=false;openAddNewConceptForm()" > Add Concept</button>
-  <button md-raised-button color="primary" (click)="showPopUp=false;openAddNewProblemForm()" > Add Problem</button>
-</div>
+<!--<div *ngIf="showPopUp">-->
+  <!--<button md-raised-button color="primary" (click)="showPopUp=false;openAddNewConceptForm()" > Add Concept</button>-->
+  <!--<button md-raised-button color="primary" (click)="showPopUp=false;openAddNewProblemForm()" > Add Problem</button>-->
+<!--</div>-->

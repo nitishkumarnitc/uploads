@@ -1,6 +1,9 @@
 <md-toolbar color="primary" style="display: flex; alignment: center">
-  Welcome to eTutor Admin Panel
-  <!--<md-icon style="text-align: end">account_circle</md-icon>-->
+ <p *ngIf="getIsUserLoggedIn()">{{getWelcomeMessage()}}</p>
+
+  <div class="img-responsive" *ngIf="getIsUserLoggedIn()" (click)="logOut()"><md-icon>power_settings_new</md-icon></div>
+
+
 </md-toolbar>
 <router-outlet></router-outlet>
 

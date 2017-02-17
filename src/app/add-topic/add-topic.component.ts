@@ -46,7 +46,7 @@ export class AddTopicComponent implements OnInit {
 
   setStatusMessage(){
     if(this.statusTopicAdded){
-      this.statusMessage="Added Successfully,You can add another here or press Cancel to Go Back";
+      this.statusMessage="Success, Wanna add More! Do it !";
     }else {
       this.statusMessage="Not Added Successfully, Try again";
     }

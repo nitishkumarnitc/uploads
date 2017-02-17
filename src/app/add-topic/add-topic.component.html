@@ -16,18 +16,20 @@
 
       <div>
         <p>Chapter Selected is : {{getChapterName()}}</p>
+
+        <!--<p>Chapter Id is {{addTopicForm.controls.ChapterId.controls.value}}</p>-->
       </div>
 
-      <md-toolbar color="primary" *ngIf="statusMessage"><md-toolbar-row style="display: flex;justify-content: center">
+      <md-toolbar color="primary" *ngIf="statusMessage" style="display: flex;justify-content: center">
         {{statusMessage}}
-      </md-toolbar-row></md-toolbar>
+      </md-toolbar>
 
 
 
-      <div style="display: none" class="form-group" [ngClass]="{'error': ChapterId?.invalid && ChapterId?.touched}">
-        <input [(ngModel)]="chapterId" formControlName="ChapterId" id="ChapterId"/>
-        <em *ngIf="ChapterId?.invalid && ChapterId?.touched">Required</em>
-      </div>
+      <!--<div style="display: none" class="form-group" [ngClass]="{'error': ChapterId?.invalid && ChapterId?.touched}">-->
+        <!--<input [(ngModel)]="chapterId" formControlName="ChapterId" id="ChapterId"/>-->
+        <!--<em *ngIf="ChapterId?.invalid && ChapterId?.touched">Required</em>-->
+      <!--</div>-->
 
 
       <div class="form-group" [ngClass]="{'error': Name?.invalid && Name?.touched}">
@@ -48,4 +50,9 @@
       </md-card>
     </form>
   </div>
+
+  <div>addProblemForm details:-</div>
+  <pre>Is addTopicForm valid?: <br>{{addTopicForm.valid | json}}</pre>
+  <!--<pre>form value: <br>{{addTopicForm.value | json}}</pre>-->
+
 </md-card>

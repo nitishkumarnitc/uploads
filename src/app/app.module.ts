@@ -23,8 +23,7 @@ import {LoginService} from "./service/login.service";
 import { AddProblemComponent } from './add-problem/add-problem.component';
 import { ProblemTextComponent } from './add-problem/problem-text/problem-text.component';
 import { HomeComponent } from './home/home.component';
-
-
+import {Authentication} from "./service/authentication";
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +52,7 @@ import { HomeComponent } from './home/home.component';
     PopoverModule.forRoot()
 
   ],
-  providers: [UploadsService,LoginService,FormHelperService],
+  providers: [UploadsService,LoginService,FormHelperService,Authentication],
   bootstrap: [AppComponent],
 
 })

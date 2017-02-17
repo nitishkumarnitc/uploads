@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormHelperService} from "./service/form-helper.service";
-import {UploadsService} from "./service/uploads.service";
+import {LoginService} from "./service/login.service";
 
 
 @Component({
@@ -12,5 +12,18 @@ import {UploadsService} from "./service/uploads.service";
 })
 export class AppComponent {
 
+  constructor(private loginService:LoginService,private router:Router){}
 
+  getWelcomeMessage(){
+    return LoginService.welcomeMessage;
+  }
+
+  getIsUserLoggedIn(){
+    return LoginService.isUserLoggedIn;
+  }
+
+  logOut(){
+    LoginService.isUserLoggedIn=false;
+    this.router.navigate(['login']);
+  }
 }

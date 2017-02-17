@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, DoCheck} from '@angular/core';
 import {FormHelperService} from "../service/form-helper.service";
 import {UploadsService} from "../service/uploads.service";
 import {Topic} from "../add-topic/topic";
@@ -10,6 +10,10 @@ import {Router} from "@angular/router";
   styleUrls: ['topics.component.css']
 })
 export class TopicsComponent implements OnInit {
+  // ngDoCheck(): void {
+  // }
+
+  private chapterId:number;
 
   constructor(private uploadService:UploadsService,private router:Router) {
     this.length = this.data.length;
@@ -21,7 +25,23 @@ export class TopicsComponent implements OnInit {
 
 
   errorMessage:string;
+
+  ngDoCheck(){
+    console.log("Inside NG do check tables");
+    if(this.chapterId!=FormHelperService.chapterId){
+      this.chapterId=FormHelperService.chapterId;
+
+      this.data.length=0;
+      this.uploadService.getTopicsList(FormHelperService.chapterId)
+        .subscribe(topics=>{this.data=topics;
+            this.onChangeTable(this.config)},
+          error=>this.errorMessage=<any>error);
+
+    }
+  }
+
   ngOnInit() {
+    this.chapterId=FormHelperService.chapterId;
     console.log("Inside NG On Init topics");
     this.data.length=0;
     this.uploadService.getTopicsList(FormHelperService.chapterId)
